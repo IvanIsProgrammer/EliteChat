@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/layout_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:background="@drawable/menu_background">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/text_menu"
+            android:text="@string/lbl_selectServer"/>
+
+        <EditText
+            android:id="@+id/et_ip"
+            style="@style/text_input"
+            android:ems="10"
+            android:hint="Адрес сервера"
+            android:inputType="date" />
+
+        <Button
+            android:id="@+id/btn_connect"
+            style="@style/button"
+            android:text="@string/lbl_connect"/>
+
+        <Button
+            android:id="@+id/btn_controlServer"
+            style="@style/button"
+            android:text="Управление сервером" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
