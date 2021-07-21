@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -60,7 +58,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             }));
         });
 
-        client.setOnFailedConnectionListener(exception -> {
+        client.setOnFailedConnection(exception -> {
             handler.post(()->{
                 Toast.makeText(this, "Сервер закрыт!", Toast.LENGTH_SHORT).show();
             });

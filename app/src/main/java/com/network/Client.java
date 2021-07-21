@@ -9,8 +9,8 @@ public class Client {
     private ObjectOutputStream out;
 
     private OnNewMessageListener onNewMessageListener = msg->{};
-    private OnFailedConnectionListener onFailedConnectionListener = exception->{};
-    private OnServerCloseListener onServerCloseListener = exception->{};
+    private OnFailedConnection onFailedConnection = exception->{};
+    private OnServerClose onServerClose = exception->{};
 
     public Client() {
         //ToDO...
@@ -23,7 +23,7 @@ public class Client {
             this.in = new ObjectInputStream(socket.getInputStream());
             new ReadMsg().start();
         } catch (IOException e) {
-            onFailedConnectionListener.failedConnection("Server is not available");
+            onFailedConnection.failedConnection("Server is not available");
             e.printStackTrace();
             return false;
         }
@@ -47,7 +47,7 @@ public class Client {
                 out.flush();
             } catch (IOException e) {
                 disconnect();
-                onServerCloseListener.serverClose("Server is closed");
+                onServerClose.serverClose("Server is closed");
                 e.printStackTrace();
             }
         }).start();
@@ -72,7 +72,7 @@ public class Client {
                 } catch (IOException | ClassNotFoundException e) {
                     run = false;
                     disconnect();
-                    onServerCloseListener.serverClose("Servers I/O Streams is closed");
+                    onServerClose.serverClose("Servers I/O Streams is closed");
                     e.printStackTrace();
                 }
             }
@@ -83,11 +83,11 @@ public class Client {
         void newMessage(Message msg);
     }
 
-    public interface OnFailedConnectionListener {
+    public interface OnFailedConnection {
         void failedConnection(String exception);
     }
 
-    public interface OnServerCloseListener {
+    public interface OnServerClose {
         void serverClose(String exception);
     }
 
@@ -96,12 +96,12 @@ public class Client {
         this.onNewMessageListener = onNewMessageListener;
     }
 
-    public void setOnFailedConnectionListener(OnFailedConnectionListener onFailedConnectionListener) {
-        this.onFailedConnectionListener = onFailedConnectionListener;
+    public void setOnFailedConnection(OnFailedConnection onFailedConnection) {
+        this.onFailedConnection = onFailedConnection;
     }
 
-    public void setOnServerCloseListener(OnServerCloseListener onServerCloseListener) {
-        this.onServerCloseListener = onServerCloseListener;
+    public void setOnServerClose(OnServerClose onServerClose) {
+        this.onServerClose = onServerClose;
     }
 
 }
